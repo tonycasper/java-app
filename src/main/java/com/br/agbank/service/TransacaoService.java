@@ -62,11 +62,22 @@ public class TransacaoService {
                 log.info("Notificação enviada com sucesso para a conta de origem ID: " + contaOrigem.getId() + " e conta de destino ID: " + contaDestino.getId());
 //                transacao.setStatus("Notificação Enviada");
 //                transacaoRepository.save(transacao);
+            } else {
+                registrarFalhaNotificacao(contaOrigem, contaDestino, valor);
+                agendarReenvioNotificacao(contaOrigem, contaDestino, valor);
             }
 
         } catch (RestClientException e) {
-            // Logar o erro e possivelmente tentar reenviar a notificação mais tarde
+            registrarFalhaNotificacao(contaOrigem, contaDestino, valor);
+            agendarReenvioNotificacao(contaOrigem, contaDestino, valor);
         }
+    }
+
+    private void registrarFalhaNotificacao(Conta contaOrigem, Conta contaDestino, BigDecimal valor) {
+        log.error("Falha ao enviar notificação para a conta de origem ID: " + contaOrigem.getId() + " e conta de destino ID: " + contaDestino.getId());
+    }
+
+    private void agendarReenvioNotificacao(Conta contaOrigem, Conta contaDestino, BigDecimal valor) {
     }
 
 }
