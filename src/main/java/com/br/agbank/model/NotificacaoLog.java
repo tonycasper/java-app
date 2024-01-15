@@ -1,26 +1,24 @@
 package com.br.agbank.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
-@NoArgsConstructor
-public class Conta {
+public class NotificacaoLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
-    private String agencia;
-    private BigDecimal saldo;
-    private String status; // "Ativa" ou "Inativa"
+    private Long contaOrigemId;
+    private Long contaDestinoId;
+    private BigDecimal valorTransferido;
+    private LocalDateTime dataTentativa;
+    private String status; // Exemplo: "Falha", "Sucesso", "Pendente"
+    private String mensagemErro; // Opcional, para detalhar o erro
 }
-
