@@ -20,6 +20,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Cliente> cadastrarCliente(@RequestBody Cliente cliente) {
         // Implementação do método
+        return null;
     }
 
     // Outros endpoints
